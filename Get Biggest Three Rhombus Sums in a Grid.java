@@ -1,9 +1,8 @@
 /*
 Problem:
-You are given an m x n integer matrix grid​​​.
+You are given an m x n integer matrix grid​​​. Return the biggest three distinct rhombus sums in the grid in descending order. If there are less than three distinct values, return all of them.
 A rhombus sum is the sum of the elements that form the border of a regular rhombus shape in grid​​​. The rhombus must have the shape of a square rotated 45 degrees with each of the corners centered in a grid cell. 
 Note that the rhombus can have an area of 0.
-Return the biggest three distinct rhombus sums in the grid in descending order. If there are less than three distinct values, return all of them.
 */
 class Solution {
     public int[] getBiggestThree(int[][] grid) {
