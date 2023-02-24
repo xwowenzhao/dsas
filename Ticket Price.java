@@ -13,7 +13,8 @@ class Ticket {
         SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY 
     }
  
-    private enum Type {
+    // Type of ticket and corresponding price
+    private enum Type {        
         GENERAL_ADMISSION(11),
         STUDENT(8),
         SENIOR(6.5),
@@ -29,24 +30,25 @@ class Ticket {
         }            
     }
     
-    private enum Feature {
+    // Feature of ticket and corresponding extra charge or discount
+    private enum Extra {
         OVERLENGTH(2),
         THREE_D(2),
         BALCONY(3),
         SPECIAL(-2),
         WEEKEND(2);
         
-        private double price;
-        Feature(double price) {
-            this.price = price;
+        private double extra;
+        Extra(double extra) {
+            this.extra = extra;
         }
         
-        private double getPrice() {
-            return price;
+        private double getExtra() {
+            return extra;
         }   
     }    
 
-    static class Order {
+    private static class Order {
         private int num;
         private Type type;
         private Day day;
@@ -67,21 +69,21 @@ class Ticket {
     private static double calculateTotalPrice(List<Order> orders) {
         double total = 0;
         for(Order order : orders) {
-            double one = 0;
+            double one = 0; // Price of one ticket
             one += order.type.getPrice();
             if(order.day == Day.THURSDAY) {
-                one += Feature.SPECIAL.getPrice();
+                one += Extra.SPECIAL.getExtra();
             } else if (order.day == Day.SATURDAY || order.day == Day.SUNDAY) {
-                one += Feature.WEEKEND.getPrice();
+                one += Extra.WEEKEND.getExtra();
             }
             if(order.overlength) {
-                one += Feature.OVERLENGTH.getPrice();
+                one += Extra.OVERLENGTH.getExtra();
             }
             if(order.threeD) {
-                one += Feature.THREE_D.getPrice();
+                one += Extra.THREE_D.getExtra();
             }
             if(order.balcony) {
-                one += Feature.BALCONY.getPrice();
+                one += Extra.BALCONY.getExtra();
             }
             total += one * order.num;
         }
