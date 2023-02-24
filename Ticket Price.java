@@ -31,7 +31,7 @@ class Ticket {
     }
     
     // Feature of ticket and corresponding extra charge or discount
-    private enum Extra {
+    private enum Feature {
         OVERLENGTH(2),
         THREE_D(2),
         BALCONY(3),
@@ -39,7 +39,7 @@ class Ticket {
         WEEKEND(2);
         
         private double extra;
-        Extra(double extra) {
+        Feature(double extra) {
             this.extra = extra;
         }
         
@@ -72,18 +72,18 @@ class Ticket {
             double one = 0; // Price of one ticket
             one += order.type.getPrice();
             if(order.day == Day.THURSDAY) {
-                one += Extra.SPECIAL.getExtra();
+                one += Feature.SPECIAL.getExtra();
             } else if (order.day == Day.SATURDAY || order.day == Day.SUNDAY) {
-                one += Extra.WEEKEND.getExtra();
+                one += Feature.WEEKEND.getExtra();
             }
             if(order.overlength) {
-                one += Extra.OVERLENGTH.getExtra();
+                one += Feature.OVERLENGTH.getExtra();
             }
             if(order.threeD) {
-                one += Extra.THREE_D.getExtra();
+                one += Feature.THREE_D.getExtra();
             }
             if(order.balcony) {
-                one += Extra.BALCONY.getExtra();
+                one += Feature.BALCONY.getExtra();
             }
             total += one * order.num;
         }
